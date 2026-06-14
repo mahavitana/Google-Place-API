@@ -1,0 +1,65 @@
+# ============================================================
+#  Business scraper configuration
+#  Copy this file to  config.yaml  and edit the values.
+# ============================================================
+
+area_name: "Colombo"
+
+# ---- OpenStreetMap (free, no key) -----------------------------------
+osm:
+  area_name: "Colombo"
+  # bbox: [min_lat, min_lon, max_lat, max_lon]  (find one at boundingbox.klokantech.com)
+  bbox: [6.85, 79.84, 6.98, 79.92]
+  use_bbox: true            # true = use bbox, false = use area_name
+  endpoint: "https://overpass-api.de/api/interpreter"
+  timeout: 180
+
+# ---- Google Places API (New) ----------------------------------------
+google:
+  api_key: ""               # leave empty to skip Google
+  center: [6.9271, 79.8612] # lat, lon  (Colombo Fort)
+  grid:
+    half_extent_m: 6000      # half-width of square area to cover, metres
+    cell_radius_m: 600       # radius of each search cell, metres (smaller = more complete + more cost)
+  included_types:
+    - restaurant
+    - cafe
+    - bar
+    - bakery
+    - clothing_store
+    - electronics_store
+    - furniture_store
+    - hardware_store
+    - jewelry_store
+    - supermarket
+    - pharmacy
+    - beauty_salon
+    - hair_care
+    - gym
+    - lodging
+    - car_repair
+    - real_estate_agency
+    - lawyer
+    - accounting
+    - dentist
+    - doctor
+
+# ---- Website enrichment ---------------------------------------------
+enrich:
+  workers: 6
+  timeout: 15
+  per_domain_delay: 1.0
+  contact_paths:
+    - "/contact"
+    - "/contact-us"
+    - "/contactus"
+    - "/about"
+    - "/about-us"
+    - "/team"
+    - "/our-team"
+  respect_robots: true
+  user_agent: "Mozilla/5.0 (compatible; BizContactBot/1.0)"
+
+# ---- Storage --------------------------------------------------------
+database: "businesses.db"
+csv_export: "businesses_export.csv"
